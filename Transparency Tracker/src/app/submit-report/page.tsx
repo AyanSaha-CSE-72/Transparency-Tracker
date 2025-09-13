@@ -22,7 +22,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { ArrowLeft, FileText, CheckCircle, AlertCircle } from 'lucide-react';
+import { ArrowLeft, CheckCircle, AlertCircle } from 'lucide-react';
 import { divisionDistricts, categories } from '@/lib/data';
 import { createReportAction } from '../actions';
 import { useRouter } from 'next/navigation';
@@ -103,7 +103,7 @@ export default function ReportPage() {
                   <Label htmlFor="district">জেলা</Label>
                   <Select name="district" required disabled={!selectedDivision} value={selectedDistrict} onValueChange={setSelectedDistrict}>
                     <SelectTrigger>
-                      <SelectValue placeholder="প্রথমে বিভাগ নির্বাচন করুন" />
+                      <SelectValue placeholder={!selectedDivision ? "প্রথমে বিভাগ নির্বাচন করুন" : "জেলা নির্বাচন করুন"} />
                     </SelectTrigger>
                     <SelectContent>
                       {availableDistricts.map((dis) => (
@@ -142,22 +142,44 @@ export default function ReportPage() {
               
               <SubmitButton />
 
-              {state?.message && !state.success && (
+              {state.success && (
+                <div className="mt-4">
+                  <Alert variant="default" className="border-green-500/50 text-green-700 dark:border-green-500 [&>svg]:text-green-700">
+                    <CheckCircle className="h-4 w-4" />
+                    <AlertTitle>সফল!</AlertTitle>
+                    <AlertDescription>
+                      আপনার রিপোর্ট সফলভাবে জমা হয়েছে।
+                    </AlertDescription>
+                  </Alert>
+                </div>
+              )}
+
+              {state?.message && !state.success && typeof state.message === 'object' && Object.keys(state.message).length > 0 && (
                 <div className="mt-4">
                     <Alert variant="destructive">
                       <AlertCircle className="h-4 w-4" />
                       <AlertTitle>ত্রুটি</AlertTitle>
                       <AlertDescription>
                         <ul>
-                          {typeof state.message === 'object' && Object.entries(state.message).map(([key, value]) => (
+                          {Object.entries(state.message).map(([key, value]) => (
                             <li key={key}>{`${value}`}</li>
                           ))}
-                           {typeof state.message === 'string' && <li>{state.message}</li>}
                         </ul>
                       </AlertDescription>
                     </Alert>
                 </div>
               )}
+               {state?.message && !state.success && typeof state.message === 'string' && (
+                 <div className="mt-4">
+                    <Alert variant="destructive">
+                      <AlertCircle className="h-4 w-4" />
+                      <AlertTitle>ত্রুটি</AlertTitle>
+                      <AlertDescription>
+                        {state.message}
+                      </AlertDescription>
+                    </Alert>
+                 </div>
+               )}
             </form>
           </CardContent>
         </Card>
@@ -165,3 +187,4 @@ export default function ReportPage() {
     </div>
   );
 }
+
