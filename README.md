@@ -66,7 +66,7 @@ Transparency Tracker will increase corruption reporting through an anonymous sys
   - Bar chart for top 10 affected Districts  
   - Area chart for time-based report trends  
 - **🔍 Advanced Filtering** – Filter reports by Division, District, or Category  
-- **🤖 AI-Generated Summary** – Uses **Genkit (Google AI)** to automatically summarize reports  
+- **🤖 AI-Generated Summary** – Uses **Genkit (Google AI)** to automatically summarize reports   
 
 ---
 
