@@ -71,7 +71,7 @@ Transparency Tracker will increase corruption reporting through an anonymous sys
 ---
 
 ## 🎥 Demo Video
-[![Watch the Demo](https://youtu.be/C9evZmLioP8?si=DAVoTBhNYMLf5vJZ)  
+(https://youtu.be/C9evZmLioP8?si=DAVoTBhNYMLf5vJZ)  
 
 ---
 
